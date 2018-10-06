@@ -76,7 +76,7 @@ def Decoder(x, n_hidden_channel=16, n_output_channel=3, n_extra_layer=0):
     channel = xshape[3]
     w_conv = tf.get_variable('decoder_wconv_initial', shape=[4, 4, channel, channel],
                              initializer=tf.truncated_normal_initializer(stddev=0.1))
-    conv = tf.nn.conv2d_transpose(x, filter=w_conv, strides=[1, 1, 1, 1], padding='SAME',
+    conv = tf.nn.conv2d_transpose(x, filter=w_conv, strides=[1, 1, 1, 1], padding='VALID',
                                   output_shape=[-1, shape, shape, channel])
     batch_norm = tf.layers.batch_normalization(conv)
     relu = tf.nn.relu(batch_norm)
